@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace eCommerce.Infrastructure.Persistence.Configurations
+namespace eCommerce.Infrastructure.Configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
@@ -36,6 +36,10 @@ namespace eCommerce.Infrastructure.Persistence.Configurations
             builder.Property(x => x.IsActive)
                 .IsRequired()
                 .HasDefaultValue(true);
+
+            builder.Property(x => x.ViewCount)
+                .IsRequired()
+                .HasDefaultValue(0);
 
             // Indexes
             builder.HasIndex(x => x.Slug)

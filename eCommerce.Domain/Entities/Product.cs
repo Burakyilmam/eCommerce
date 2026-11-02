@@ -22,6 +22,8 @@
 
         public bool IsActive { get; set; } = true;
 
+        public int ViewCount { get; set; } = 0;
+
         public ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
         public ICollection<ProductVariant> Variants { get; set; } = new List<ProductVariant>();

@@ -3,7 +3,7 @@ using eCommerce.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace eCommerce.Infrastructure.Persistence.Configurations
+namespace eCommerce.Infrastructure.Configurations
 {
     public class StoreConfiguration : IEntityTypeConfiguration<Store>
     {

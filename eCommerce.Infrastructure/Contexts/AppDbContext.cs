@@ -1,27 +1,45 @@
 ﻿
 using eCommerce.Domain.Entities;
-using eCommerce.Infrastructure;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace eCommerce.Infrastructure.Persistence.Contexts
+namespace eCommerce.Infrastructure.Contexts
 {
-    public class AppDbContext
-        : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker.Entries<BaseEntity>();
+
+            foreach (var entry in entries)
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedAt = DateTime.UtcNow;
+                    entry.Entity.CreatedBy = "System";
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    entry.Entity.UpdatedBy = "System";
+
+                    entry.Property(x => x.CreatedAt).IsModified = false;
+                    entry.Property(x => x.CreatedBy).IsModified = false;
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            // Infrastructure assembly içerisindeki tüm
-            // IEntityTypeConfiguration sınıflarını uygular.
-            builder.ApplyConfigurationsFromAssembly(
-                typeof(AppDbContext).Assembly);
+            builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }
 
         // Kullanıcı profili
