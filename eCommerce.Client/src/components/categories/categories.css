@@ -1,0 +1,308 @@
+/* GENEL */
+.categories {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+/* ==============================
+   MASAÜSTÜ KATEGORİ MENÜSÜ
+================================= */
+
+.desktop-categories {
+    position: relative;
+    z-index: 100;
+
+    display: block;
+    width: 100%;
+    min-height: 70px;
+
+    background-color: #f7f7f7;
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.desktop-category-list {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+
+    width: 100%;
+    min-height: 70px;
+}
+
+.desktop-category-item {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 70px;
+    padding: 8px 12px;
+
+    border: 0;
+    border-right: 1px solid #dddddd;
+    background: transparent;
+
+    color: #555555;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+    cursor: pointer;
+
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.desktop-category-item:hover,
+.desktop-category-item.active {
+    color: #f27a1a;
+    background-color: #ffffff;
+}
+
+/* Masaüstü alt menü: nav'a göre absolute.
+   Böylece açıldığında sayfanın yüksekliğini artırmaz. */
+.desktop-mega-menu {
+    position: absolute;
+    top: 100%;
+    z-index: 200;
+
+    width: min(380px, calc(100vw - 20px));
+    max-height: min(600px, calc(100vh - 180px));
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.desktop-mega-menu-header {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-between;
+    align-items: center;
+
+    min-height: 58px;
+    padding: 12px 18px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+.desktop-mega-menu-header h3 {
+    margin: 0;
+    color: #f27a1a;
+    font-size: 18px;
+}
+
+.desktop-mega-menu-header button {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.desktop-mega-menu-header button:hover {
+    background-color: #f5f5f5;
+}
+
+.desktop-mega-menu-content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    min-height: 0;
+    padding: 8px 12px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.desktop-mega-menu-content > * {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+}
+
+/* CategoryTree içindeki açılır grupların boşluk bırakmasını önle */
+.desktop-mega-menu-content .category-group,
+.desktop-mega-menu-content .category-group-content {
+    height: auto;
+    min-height: 0;
+}
+
+/* Mobil menü masaüstünde görünmez */
+.mobile-categories {
+    display: none;
+}
+
+/* ==============================
+   TABLET VE MOBİL
+================================= */
+
+@media (max-width: 900px) {
+    .desktop-categories {
+        display: none;
+    }
+
+    .mobile-categories {
+        display: grid;
+        grid-template-columns: 165px 6px minmax(0, 1fr);
+
+        width: 100%;
+        height: 0;
+        min-height: 0;
+
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
+
+        transition:
+            height 0.3s ease,
+            opacity 0.25s ease,
+            visibility 0.3s ease;
+    }
+
+    .mobile-categories.open {
+        height: calc(100dvh - 150px);
+        min-height: 400px;
+
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .category-sidebar {
+        display: flex;
+        flex-direction: column;
+
+        min-width: 0;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        padding: 10px 7px;
+        border-right: 1px solid #e5e5e5;
+        background-color: #fafafa;
+    }
+
+    .category-sidebar-item {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        gap: 10px;
+
+        width: 100%;
+        min-height: 58px;
+        padding: 10px;
+
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+
+        text-align: left;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .category-sidebar-item span:first-child {
+        flex-shrink: 0;
+        font-size: 21px;
+    }
+
+    .category-sidebar-item.active {
+        color: #f27a1a;
+        font-weight: 700;
+        background-color: #fff1e8;
+    }
+
+    .category-content {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-content: start;
+        align-items: start;
+        gap: 25px;
+
+        min-width: 0;
+        min-height: 0;
+        padding: 20px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .category-group {
+        min-width: 0;
+    }
+
+    .category-group h3 {
+        margin: 0 0 14px;
+        color: #f27a1a;
+        font-size: 16px;
+    }
+
+    .category-link {
+        margin-bottom: 13px;
+        color: #333333;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .category-link:hover {
+        color: #f27a1a;
+    }
+
+    .category-resizer {
+        width: 6px;
+        min-height: 0;
+        background-color: #eeeeee;
+
+        cursor: col-resize;
+        touch-action: none;
+        user-select: none;
+
+        transition: background-color 0.2s ease;
+    }
+
+    .category-resizer:hover,
+    .category-resizer:active {
+        background-color: #f27a1a;
+    }
+}
+
+/* ==============================
+   KÜÇÜK TELEFONLAR
+================================= */
+
+@media (max-width: 480px) {
+    .mobile-categories {
+        grid-template-columns: 135px 6px minmax(0, 1fr);
+    }
+
+    .category-sidebar {
+        padding: 8px 5px;
+    }
+
+    .category-sidebar-item {
+        gap: 7px;
+        min-height: 55px;
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .category-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px;
+    }
+
+    .category-group h3 {
+        font-size: 15px;
+    }
+
+    .category-link {
+        font-size: 14px;
+    }
+}

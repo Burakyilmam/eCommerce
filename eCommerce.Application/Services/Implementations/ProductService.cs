@@ -26,4 +26,14 @@ public class ProductService : GenericService<Product>, IProductService
     {
         return await _productRepository.GetMostViewedProductsAsync(cancellationToken);
     }
+
+    public async Task<IReadOnlyList<Product>> GetProductsWithDetailsAsync(CancellationToken cancellationToken = default)
+    {
+        return await _productRepository.GetProductsWithDetailsAsync(cancellationToken);
+    }
+
+    public Task<Product?> GetProductDetailsAsync(int productId, CancellationToken cancellationToken = default)
+    {
+        return _productRepository.GetProductDetailsAsync(productId, cancellationToken);
+    }
 }

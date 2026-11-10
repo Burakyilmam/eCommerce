@@ -15,6 +15,17 @@ public partial class Program
         builder.Services.AddApplication();
         builder.Services.AddInfrastructure(builder.Configuration);
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("ReactClient", policy =>
+            {
+                policy
+                    .WithOrigins("http://localhost:5173")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
+
         var app = builder.Build();
 
         if (app.Environment.IsDevelopment())
@@ -24,6 +35,8 @@ public partial class Program
         }
 
         app.UseHttpsRedirection();
+
+        app.UseCors("ReactClient");
 
         app.UseAuthorization();
 

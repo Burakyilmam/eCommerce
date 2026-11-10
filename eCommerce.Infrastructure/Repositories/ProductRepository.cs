@@ -11,11 +11,17 @@ namespace eCommerce.Infrastructure.Repositories
 
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsWithDetailsAsync(CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<Product>> GetProductsWithDetailsAsync(
+            CancellationToken cancellationToken = default)
         {
-            return await _dbSet.AsNoTracking()
+            return await _dbSet
+                .AsNoTracking()
+                .AsSplitQuery()
                 .Include(x => x.Category)
                 .Include(x => x.Brand)
+                .Include(x => x.Images)
+                .Include(x => x.Variants)
+                    .ThenInclude(v => v.SellerListings)
                 .ToListAsync(cancellationToken);
         }
 

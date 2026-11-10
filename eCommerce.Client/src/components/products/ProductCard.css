@@ -1,0 +1,159 @@
+
+.product-card {
+    flex: 0 0 274px;
+    min-width: 0;
+    border: 1px solid #e8e8e8;
+    border-radius: 11px;
+    padding: 4px;
+    background: white;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.product-image-container {
+    position: relative;
+    height: 264px;
+    background: #f7f7f7;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 8px;
+    padding: 7px 9px;
+    border-radius: 50%;
+    background: #ff7217;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.favorite-button {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.favorite-active {
+    color: #e60023;
+}
+
+.product-details {
+    padding: 9px 5px 3px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.product-name {
+    height: 40px;
+    margin: 0;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #333;
+}
+
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.product-rating span {
+    color: #ff6500;
+    font-size: 18px;
+}
+
+.product-rating small {
+    color: #777;
+}
+
+.product-installment {
+    margin-top: 8px;
+    color: #7b20db;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-price-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: auto;
+    padding: 7px 5px;
+
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+.product-old-price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #888;
+    font-size: 11px;
+}
+
+.product-old-price span {
+    background: #009b35;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.product-current-price {
+    margin-top: 3px;
+    color: #009b35;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.add-to-cart-button {
+    border: none;
+    background: transparent;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        flex-basis: 210px;
+    }
+
+    .product-image-container {
+        height: 200px;
+    }
+
+    .product-price-area {
+        margin-top: 25px;
+    }
+}

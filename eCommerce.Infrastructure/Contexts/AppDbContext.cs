@@ -50,6 +50,8 @@ namespace eCommerce.Infrastructure.Contexts
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
 
+        public DbSet<Slider> Sliders { get; set; }
+
         // Ürün varyantları ve görseller
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }

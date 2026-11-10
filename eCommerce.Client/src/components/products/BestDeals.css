@@ -1,0 +1,125 @@
+
+.best-deals {
+    width: calc(100% - 90px);
+    margin: 30px auto;
+}
+
+.best-deals-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.best-deals-header h2 {
+    font-size: 26px;
+    color: #333;
+    margin: 0;
+}
+
+.view-all-button {
+    border: none;
+    background: none;
+    color: #ff6500;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Ürün listesi kapsayıcısı */
+
+.best-deals-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Yatay ürün listesi */
+
+.product-list {
+    display: flex;
+    gap: 30px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+
+    padding-bottom: 5px;
+}
+
+.product-list::-webkit-scrollbar {
+    display: none;
+}
+
+.product-list.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+}
+
+/* Ok butonları */
+
+.product-scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 46px;
+    height: 46px;
+
+    border: none;
+    border-radius: 50%;
+    background: white;
+
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.18);
+
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+
+    z-index: 10;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-scroll-button:hover {
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Okları kapsayıcının içine alıyoruz */
+
+.product-scroll-left {
+    left: 10px;
+}
+
+.product-scroll-right {
+    right: 10px;
+}
+
+/* Mobil */
+
+@media (max-width: 768px) {
+    .best-deals {
+        width: calc(100% - 24px);
+    }
+
+    .best-deals-header h2 {
+        font-size: 20px;
+    }
+
+    .product-list {
+        gap: 12px;
+    }
+
+    .product-scroll-button {
+        display: none;
+    }
+}

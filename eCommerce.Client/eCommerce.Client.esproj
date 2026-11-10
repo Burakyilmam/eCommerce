@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.586930">
+  <PropertyGroup>
+    <StartupCommand>set "PATH=$(APPDATA)\fnm\node-versions\v26.13.0\installation;%PATH%" &amp;&amp; npm.cmd run dev</StartupCommand>
+    <BuildCommand>set "PATH=$(APPDATA)\fnm\node-versions\v26.13.0\installation;%PATH%" &amp;&amp; npm.cmd run build</BuildCommand>
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+    <JavaScriptTestRoot>src</JavaScriptTestRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\assets\icons\" />
+  </ItemGroup>
+</Project>

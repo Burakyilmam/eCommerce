@@ -1,0 +1,204 @@
+.slider {
+    position: relative;
+    display: flex;
+    width: calc(100% - 70px);
+    height: 330px;
+    margin: 15px auto 30px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: #790000;
+    color: white;
+}
+
+/* Sol görsel alanı */
+
+.slider-image {
+    width: 58%;
+    height: 100%;
+    padding: 16px;
+    z-index: 1;
+}
+
+.slider-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* Sağ kampanya alanı */
+
+.slider-content {
+    width: 42%;
+    padding: 25px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: repeating-linear-gradient(
+        135deg,
+        #8d0000,
+        #8d0000 3px,
+        #590000 3px,
+        #590000 9px
+    );
+}
+
+.slider-content h2 {
+    font-size: 22px;
+    margin: 0 0 10px;
+}
+
+.slider-content h3 {
+    font-size: 26px;
+    background: white;
+    color: #e00025;
+    padding: 5px 12px;
+    margin: 0 0 18px;
+}
+
+.slider-discount {
+    font-size: 43px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-shadow:
+        2px 2px 0 #ff0000,
+        -2px -2px 0 #ff0000,
+        0 0 15px #ff5555;
+}
+
+.slider-content p {
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+/* Oklar */
+
+.slider-arrow {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: #333;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.slider-prev {
+    left: 20px;
+}
+
+.slider-next {
+    right: 20px;
+}
+
+/* Sayaç */
+
+.slider-counter {
+    position: absolute;
+    z-index: 3;
+    bottom: 15px;
+    right: 45px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .slider {
+        width: calc(100% - 24px);
+        height: 240px;
+    }
+
+    .slider-image {
+        width: 50%;
+        padding: 10px;
+    }
+
+    .slider-content {
+        width: 50%;
+        padding: 15px;
+    }
+
+    .slider-content h2 {
+        font-size: 14px;
+    }
+
+    .slider-content h3 {
+        font-size: 15px;
+    }
+
+    .slider-discount {
+        font-size: 25px;
+    }
+
+    .slider-content p {
+        font-size: 10px;
+    }
+}
+/* Slider sürükleme davranışı */
+
+.slider {
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+}
+
+.slider.is-dragging {
+    cursor: grabbing;
+}
+
+.slider-image img {
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Oklar sürükleme davranışından bağımsız */
+
+.slider-arrow {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Progress bar */
+
+.slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.25);
+    z-index: 5;
+    overflow: hidden;
+}
+
+.slider-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: #ff3030;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation-name: sliderProgress;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+.slider-progress-bar.paused {
+    animation-play-state: paused;
+}
+
+@keyframes sliderProgress {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
