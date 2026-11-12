@@ -1,32 +1,33 @@
-
+import { useState } from "react";
 import "./headerActions.css";
 
 function HeaderActions(props) {
-    // Ürün miktarını değiştir
+    const [accountOpen, setAccountOpen] = useState(false);
+
+    function openAuth(tab) {
+        setAccountOpen(false);
+        props.onOpenAuth(tab);
+    }
+
     function changeQuantity(product, amount) {
         const newQuantity = product.quantity + amount;
-
         props.onUpdateCartQuantity(product.id, newQuantity);
     }
 
-    // Ürünü tamamen sil
     function handleRemoveItem(product) {
         props.onRemoveFromCart(product.id);
     }
 
-    // Tüm sepeti temizle
     function handleClearCart() {
         props.onClearCart();
     }
 
-    // Sepet toplamı
     const cartTotal = props.cartItems.reduce(function (total, item) {
         return total + item.price * item.quantity;
     }, 0);
 
     return (
         <div className="header-actions">
-
             <button
                 className="mobile-search-button"
                 onClick={props.onSearchClick}
@@ -35,9 +36,99 @@ function HeaderActions(props) {
                 🔍
             </button>
 
-            <div className="header-item">
-                <span>♙</span>
-                <span>Hesabım</span>
+            <div
+                className="account-menu"
+                onMouseEnter={() => setAccountOpen(true)}
+                onMouseLeave={() => setAccountOpen(false)}
+            >
+                <button
+                    type="button"
+                    className="header-item account-trigger"
+                    aria-expanded={accountOpen}
+                    aria-haspopup="true"
+                    onClick={() => setAccountOpen(previous => !previous)}
+                >
+                    <span aria-hidden="true">♙</span>
+                    <span>Hesabım</span>
+                    <span className="account-chevron" aria-hidden="true">
+                        ▾
+                    </span>
+                </button>
+
+                {accountOpen && (
+                    <div className="account-dropdown">
+                        <div className="account-dropdown-content">
+                            {props.user ? (
+                                <>
+                                    <div className="account-user-info">
+                                        <strong>
+                                            Merhaba,{" "}
+                                            {props.user.firstName ||
+                                                props.user.email}
+                                        </strong>
+                                        <small>{props.user.email}</small>
+                                    </div>
+
+                                    <div className="account-menu-links">
+                                        <button type="button" disabled>
+                                            ♙ Profilim
+                                            <small>Yakında</small>
+                                        </button>
+
+                                        <button type="button" disabled>
+                                            📦 Siparişlerim
+                                            <small>Yakında</small>
+                                        </button>
+
+                                        <button type="button" disabled>
+                                            ♡ Favorilerim
+                                            <small>Yakında</small>
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            className="account-logout"
+                                            onClick={() => {
+                                                setAccountOpen(false);
+                                                props.onLogout();
+                                            }}
+                                        >
+                                            ↪ Çıkış Yap
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <p className="account-welcome">
+                                        Hoş geldiniz!
+                                    </p>
+
+                                    <p className="account-description">
+                                        Hesabınıza giriş yapın veya hemen üye olun.
+                                    </p>
+
+                                    <div className="account-auth-buttons">
+                                        <button
+                                            type="button"
+                                            className="account-login-button"
+                                            onClick={() => openAuth("login")}
+                                        >
+                                            Giriş Yap
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            className="account-register-button"
+                                            onClick={() => openAuth("register")}
+                                        >
+                                            Üye Ol
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="header-item">
@@ -46,7 +137,6 @@ function HeaderActions(props) {
             </div>
 
             <div className="header-item cart-item">
-
                 <span>🛒</span>
                 <span>Sepetim</span>
 
@@ -58,26 +148,16 @@ function HeaderActions(props) {
 
                 <div className="cart-dropdown">
                     <div className="cart-dropdown-content">
-
                         {props.cartItems.length === 0 ? (
-
                             <p>Sepetiniz henüz boş.</p>
-
                         ) : (
-
                             <>
-
-                                {/* SEPET BAŞLIĞI */}
-
                                 <div className="cart-dropdown-header">
                                     <strong>Sepetim</strong>
-
                                     <span>
                                         {props.cartCount} adet
                                     </span>
                                 </div>
-
-                                {/* SEPETİ TEMİZLE */}
 
                                 <button
                                     className="cart-clear-button"
@@ -86,17 +166,13 @@ function HeaderActions(props) {
                                     Sepeti temizle
                                 </button>
 
-                                {/* ÜRÜN LİSTESİ */}
-
                                 <div className="cart-products">
-
                                     {props.cartItems.map(function (item) {
                                         return (
                                             <div
                                                 className="cart-product"
                                                 key={item.id}
                                             >
-
                                                 <img
                                                     className="cart-product-image"
                                                     src={item.image}
@@ -104,7 +180,6 @@ function HeaderActions(props) {
                                                 />
 
                                                 <div className="cart-product-info">
-
                                                     <strong className="cart-product-name">
                                                         {item.name}
                                                     </strong>
@@ -113,10 +188,7 @@ function HeaderActions(props) {
                                                         {item.price.toLocaleString("tr-TR")} TL / adet
                                                     </span>
 
-                                                    {/* MİKTAR KONTROLÜ */}
-
                                                     <div className="cart-quantity-control">
-
                                                         <button
                                                             className="quantity-button"
                                                             onClick={function () {
@@ -140,18 +212,12 @@ function HeaderActions(props) {
                                                         >
                                                             +
                                                         </button>
-
                                                     </div>
-
                                                 </div>
-
-                                                {/* ÜRÜN ARA TOPLAMI */}
 
                                                 <strong className="cart-product-subtotal">
                                                     {(item.price * item.quantity).toLocaleString("tr-TR")} TL
                                                 </strong>
-
-                                                {/* ÜRÜNÜ TAMAMEN SİL */}
 
                                                 <button
                                                     className="cart-product-delete"
@@ -163,24 +229,17 @@ function HeaderActions(props) {
                                                 >
                                                     🗑️
                                                 </button>
-
                                             </div>
                                         );
                                     })}
-
                                 </div>
-
-                                {/* SEPET TOPLAMI */}
 
                                 <div className="cart-total">
                                     <strong>Toplam</strong>
-
                                     <strong>
                                         {cartTotal.toLocaleString("tr-TR")} TL
                                     </strong>
                                 </div>
-
-                                {/* SEPETE GİT */}
 
                                 <button
                                     className="cart-go-button"
@@ -189,11 +248,8 @@ function HeaderActions(props) {
                                     Sepete Git
                                     <span>→</span>
                                 </button>
-
                             </>
-
                         )}
-
                     </div>
                 </div>
             </div>

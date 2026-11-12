@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { getProducts } from "../../services/productService.js";
 import ProductCard from "./ProductCard.jsx";
@@ -18,7 +17,6 @@ function BestDeals(props) {
         isDragging: false,
     });
 
-    // API'den ürünleri getir
     useEffect(() => {
         const controller = new AbortController();
 
@@ -51,7 +49,6 @@ function BestDeals(props) {
         return () => controller.abort();
     }, []);
 
-    // Ürünleri oklarla kaydır
     function scrollProducts(direction) {
         const container = productListRef.current;
 
@@ -63,7 +60,6 @@ function BestDeals(props) {
         });
     }
 
-    // Fareyle sürükleme başlangıcı
     function handlePointerDown(event) {
         if (event.target.closest("button")) return;
         if (event.button !== 0) return;
@@ -80,7 +76,6 @@ function BestDeals(props) {
         event.currentTarget.setPointerCapture(event.pointerId);
     }
 
-    // Fare hareketi
     function handlePointerMove(event) {
         if (!dragRef.current.isDragging) return;
 
@@ -94,13 +89,11 @@ function BestDeals(props) {
             dragRef.current.startScrollLeft - distance;
     }
 
-    // Sürükleme bitişi
     function handlePointerUp() {
         dragRef.current.isDragging = false;
         setIsDragging(false);
     }
 
-    // Sürükleme iptali
     function handlePointerCancel() {
         dragRef.current.isDragging = false;
         setIsDragging(false);
@@ -134,8 +127,7 @@ function BestDeals(props) {
             {!loading && !error && products.length > 0 && (
                 <div className="best-deals-container">
                     <div
-                        className={`product-list ${isDragging ? "is-dragging" : ""
-                            }`}
+                        className={`product-list ${isDragging ? "is-dragging" : ""}`}
                         ref={productListRef}
                         onPointerDown={handlePointerDown}
                         onPointerMove={handlePointerMove}

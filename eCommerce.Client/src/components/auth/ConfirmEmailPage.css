@@ -1,0 +1,217 @@
+
+.confirm-email-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: linear-gradient( 135deg, #f8fafc 0%, #eef2ff 55%, #f1f5f9 100% );
+    font-family: inherit;
+}
+
+    .confirm-email-page * {
+        box-sizing: border-box;
+    }
+
+.confirm-email-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 40px 36px 28px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    text-align: center;
+    animation: confirmEmailFadeIn 0.4s ease-out;
+}
+
+.confirm-email-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 38px;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #0f172a;
+}
+
+.confirm-email-logo {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #4f46e5;
+    color: #ffffff;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.confirm-email-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirm-email-icon {
+    width: 104px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-radius: 50%;
+}
+
+    .confirm-email-icon.loading {
+        background: #eef2ff;
+        color: #4f46e5;
+    }
+
+    .confirm-email-icon.success {
+        background: #ecfdf5;
+        color: #059669;
+    }
+
+    .confirm-email-icon.error {
+        background: #fef2f2;
+        color: #dc2626;
+    }
+
+.confirm-email-content h1 {
+    margin: 0 0 14px;
+    font-size: 27px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.7px;
+    color: #0f172a;
+}
+
+.confirm-email-content p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #64748b;
+}
+
+.confirm-email-description {
+    margin-top: 12px !important;
+}
+
+.confirm-email-button {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 30px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #4f46e5;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .confirm-email-button:hover {
+        background: #4338ca;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+    }
+
+    .confirm-email-button:active {
+        transform: translateY(0);
+    }
+
+    .confirm-email-button:focus-visible {
+        outline: 3px solid #a5b4fc;
+        outline-offset: 3px;
+    }
+
+.confirm-email-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 38px;
+    padding-top: 22px;
+    border-top: 1px solid #f1f5f9;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+    .confirm-email-footer svg {
+        width: 17px;
+        height: 17px;
+    }
+
+.confirm-email-spinner {
+    width: 43px;
+    height: 43px;
+    border: 4px solid #c7d2fe;
+    border-top-color: #4f46e5;
+    border-radius: 50%;
+    animation: confirmEmailSpin 0.8s linear infinite;
+}
+
+@keyframes confirmEmailSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes confirmEmailFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 520px) {
+    .confirm-email-page {
+        padding: 16px;
+    }
+
+    .confirm-email-card {
+        padding: 32px 22px 24px;
+        border-radius: 18px;
+    }
+
+    .confirm-email-brand {
+        margin-bottom: 30px;
+    }
+
+    .confirm-email-icon {
+        width: 88px;
+        height: 88px;
+    }
+
+    .confirm-email-content h1 {
+        font-size: 23px;
+    }
+
+    .confirm-email-content p {
+        font-size: 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .confirm-email-card,
+    .confirm-email-spinner {
+        animation: none;
+    }
+
+    .confirm-email-button {
+        transition: none;
+    }
+}

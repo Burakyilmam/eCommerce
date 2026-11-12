@@ -1,10 +1,8 @@
-
 import { useEffect, useMemo, useState } from 'react';
 import { getCategories } from '../../services/categoryService.js';
 import CategoryTree from './CategoryTree.jsx';
 import './categories.css';
 
-// Düz kategori listesini hiyerarşik ağaca dönüştürür.
 function buildCategoryTree(categories, parentId = null) {
     return categories
         .filter(category => category.parentCategoryId === parentId)
@@ -26,7 +24,6 @@ function Categories(props) {
     const [activeDesktopCategory, setActiveDesktopCategory] = useState(null);
     const [desktopMenuLeft, setDesktopMenuLeft] = useState(0);
 
-    // API'den kategorileri getir.
     useEffect(() => {
         const controller = new AbortController();
 
@@ -35,9 +32,7 @@ function Categories(props) {
                 const data = await getCategories(controller.signal);
 
                 if (!Array.isArray(data)) {
-                    throw new Error(
-                        'API beklenen kategori listesini döndürmedi.'
-                    );
+                    throw new Error('API beklenen kategori listesini döndürmedi.');
                 }
 
                 if (!controller.signal.aborted) {
@@ -61,7 +56,6 @@ function Categories(props) {
         return () => controller.abort();
     }, []);
 
-    // Sadece aktif kategorilerden kategori ağacı oluştur.
     const categoryTree = useMemo(() => {
         const activeCategories = categories.filter(
             category => category.isActive
@@ -70,15 +64,12 @@ function Categories(props) {
         return buildCategoryTree(activeCategories);
     }, [categories]);
 
-    // Mobil menüde seçilen ana kategori.
     const selectedData = categoryTree[selectedCategory];
 
-    // Masaüstünde açık olan ana kategori.
     const activeDesktopData = categoryTree.find(
         category => category.id === activeDesktopCategory
     );
 
-    // Mobil menü genişliğini sürükleyerek değiştirme.
     function handleResizeStart(event) {
         event.currentTarget.setPointerCapture(event.pointerId);
     }
@@ -104,7 +95,6 @@ function Categories(props) {
         setSidebarWidth(newWidth);
     }
 
-    // Masaüstü mega menüyü kategori butonuna hizala.
     function handleDesktopCategoryHover(event, categoryId) {
         const button = event.currentTarget;
         const nav = button.closest('.desktop-categories');
@@ -172,8 +162,6 @@ function Categories(props) {
 
     return (
         <div className="categories">
-
-            {/* MASAÜSTÜ KATEGORİ MENÜSÜ */}
             <nav
                 className="desktop-categories"
                 onMouseLeave={() => setActiveDesktopCategory(null)}
@@ -203,7 +191,6 @@ function Categories(props) {
                     ))}
                 </div>
 
-                {/* MASAÜSTÜ ALT KATEGORİ MENÜSÜ */}
                 {activeDesktopData &&
                     activeDesktopData.children.length > 0 && (
                         <div
@@ -244,7 +231,6 @@ function Categories(props) {
                     )}
             </nav>
 
-            {/* MOBİL / TABLET KATEGORİ MENÜSÜ */}
             <div
                 className={
                     props.isOpen
@@ -256,7 +242,6 @@ function Categories(props) {
                         sidebarWidth + "px 6px minmax(0, 1fr)"
                 }}
             >
-                {/* SOL ANA KATEGORİ LİSTESİ */}
                 <div className="category-sidebar">
                     {categoryTree.map((category, index) => (
                         <button
@@ -279,7 +264,6 @@ function Categories(props) {
                     ))}
                 </div>
 
-                {/* SÜRÜKLENEBİLİR AYIRAÇ */}
                 <div
                     className="category-resizer"
                     onPointerDown={handleResizeStart}
@@ -289,7 +273,6 @@ function Categories(props) {
                     aria-label="Kategori listesinin genişliğini ayarla"
                 />
 
-                {/* SAĞ ALT KATEGORİ İÇERİĞİ */}
                 <div className="category-content">
                     {(selectedData?.children ?? []).map(category => (
                         <CategoryTree

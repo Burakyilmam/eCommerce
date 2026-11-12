@@ -1,5 +1,6 @@
 ﻿using eCommerce.Application.DTOs.Brand;
 using eCommerce.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eCommerce.API.Controllers;
@@ -49,6 +50,7 @@ public class BrandController : ControllerBase
         return Ok(brands);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> CreateBrand([FromBody] CreateBrandDto dto, CancellationToken cancellationToken)
     {
@@ -57,6 +59,7 @@ public class BrandController : ControllerBase
         return CreatedAtAction(nameof(GetBrandById), new { id = brand.Id }, brand);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> UpdateBrand(int id, [FromBody] UpdateBrandDto dto, CancellationToken cancellationToken)
     {
@@ -67,6 +70,7 @@ public class BrandController : ControllerBase
         return Ok(brand);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteBrand(int id, CancellationToken cancellationToken)
     {

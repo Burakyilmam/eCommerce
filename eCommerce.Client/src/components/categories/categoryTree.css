@@ -1,6 +1,3 @@
-
-/* KATEGORİ AĞACI */
-
 .category-tree-node {
     display: block;
     width: 100%;
@@ -9,117 +6,80 @@
     padding: 0;
 }
 
-/* KATEGORİ SATIRI */
-
 .category-tree-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 100%;
     min-height: 54px;
     margin: 0;
     padding: 0 10px;
-
     border-bottom: 1px solid #eeeeee;
 }
-
-/* KATEGORİ İSMİ */
 
 .category-tree-button {
     flex: 1;
     min-width: 0;
-
     padding: 14px 10px;
-
     border: none;
     background: transparent;
-
     color: #333333;
     font-size: 15px;
     font-weight: 500;
     text-align: left;
-
     cursor: pointer;
 }
-
-/* AÇMA KAPATMA BUTONU */
 
 .category-tree-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
-
     flex-shrink: 0;
-
     width: 36px;
     height: 36px;
-
     border: none;
     background: transparent;
-
     cursor: pointer;
 }
 
-/* OK İŞARETİ */
+    .category-tree-toggle .arrow {
+        display: inline-block;
+        font-size: 20px;
+        transition: transform 0.2s ease;
+    }
 
-.category-tree-toggle .arrow {
-    display: inline-block;
-
-    font-size: 20px;
-    transition: transform 0.2s ease;
-}
-
-.category-tree-toggle .arrow.open {
-    transform: rotate(180deg);
-}
-
-/* ALT KATEGORİLER - KAPALI */
+        .category-tree-toggle .arrow.open {
+            transform: rotate(180deg);
+        }
 
 .category-tree-children {
     display: none;
-
     width: 100%;
     height: auto;
     min-height: 0;
-
     margin: 0;
     padding: 0;
 }
 
-/* ALT KATEGORİLER - AÇIK */
+    .category-tree-children.open {
+        display: block;
+    }
 
-.category-tree-children.open {
-    display: block;
-}
+    .category-tree-children > .category-tree-node {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        margin: 0;
+        padding-left: 20px;
+    }
 
-/* İÇ İÇE KATEGORİLER */
-
-.category-tree-children > .category-tree-node {
-    display: block;
-
-    width: 100%;
-    height: auto;
-    min-height: 0;
-
-    margin: 0;
-    padding-left: 20px;
-}
-
-/* HOVER */
-
-.category-tree-button:hover {
-    color: #f27a1a;
-}
-
+.category-tree-button:hover,
 .category-tree-toggle:hover {
     color: #f27a1a;
 }
 
-/* KÜÇÜK EKRANLAR */
-
 @media (max-width: 480px) {
-
     .category-tree-row {
         min-height: 48px;
         padding: 0 5px;
@@ -133,5 +93,4 @@
     .category-tree-children > .category-tree-node {
         padding-left: 12px;
     }
-
 }

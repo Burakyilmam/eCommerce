@@ -12,4 +12,5 @@ public interface IProductRepository : IGenericRepository<Product>
     Task<IReadOnlyList<Product>> GetProductsByLowestPriceAsync(CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Product>> GetMostViewedProductsAsync(CancellationToken cancellationToken = default);
     Task<Product?> GetProductDetailsAsync(int productId, CancellationToken cancellationToken = default);
+    Task<bool> SlugExistsAsync(string slug, int? excludeProductId = null, CancellationToken cancellationToken = default);
 }

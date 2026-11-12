@@ -12,38 +12,24 @@ namespace eCommerce.Infrastructure.Configurations
 
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(200);
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(200);
 
-            builder.Property(x => x.Slug)
-                .IsRequired()
-                .HasMaxLength(250);
+            builder.Property(x => x.Slug).IsRequired().HasMaxLength(250);
 
-            builder.Property(x => x.Description)
-                .IsRequired();
+            builder.Property(x => x.Description).IsRequired();
 
-            builder.Property(x => x.ShortDescription)
-                .HasMaxLength(500);
+            builder.Property(x => x.ShortDescription).HasMaxLength(500);
 
-            builder.Property(x => x.CategoryId)
-                .IsRequired();
+            builder.Property(x => x.CategoryId).IsRequired();
 
-            builder.Property(x => x.IsFeatured)
-                .IsRequired()
-                .HasDefaultValue(false);
+            builder.Property(x => x.IsFeatured).IsRequired().HasDefaultValue(false);
 
-            builder.Property(x => x.IsActive)
-                .IsRequired()
-                .HasDefaultValue(true);
+            builder.Property(x => x.IsActive).IsRequired().HasDefaultValue(true);
 
-            builder.Property(x => x.ViewCount)
-                .IsRequired()
-                .HasDefaultValue(0);
+            builder.Property(x => x.ViewCount).IsRequired().HasDefaultValue(0);
 
             // Indexes
-            builder.HasIndex(x => x.Slug)
-                .IsUnique();
+            builder.HasIndex(x => x.Slug).IsUnique();
 
             builder.HasIndex(x => x.CategoryId);
 

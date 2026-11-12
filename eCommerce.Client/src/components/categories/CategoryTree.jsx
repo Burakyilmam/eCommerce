@@ -1,10 +1,7 @@
-
 import { useState } from 'react';
 import './categoryTree.css';
 
 function CategoryTree(props) {
-
-    // Açılış durumunu üst bileşenden al
     const [isOpen, setIsOpen] = useState(
         props.defaultOpen !== undefined
             ? props.defaultOpen
@@ -16,7 +13,6 @@ function CategoryTree(props) {
         props.category.children.length > 0;
 
     function handleClick() {
-
         if (hasChildren) {
             setIsOpen(function (previousState) {
                 return !previousState;
@@ -28,9 +24,7 @@ function CategoryTree(props) {
 
     return (
         <div className="category-tree-node">
-
             <div className="category-tree-row">
-
                 <button
                     type="button"
                     className="category-tree-button"
@@ -52,7 +46,6 @@ function CategoryTree(props) {
                         </span>
                     </button>
                 )}
-
             </div>
 
             {hasChildren && (
@@ -63,7 +56,6 @@ function CategoryTree(props) {
                             : "category-tree-children"
                     }
                 >
-
                     {props.category.children.map(function (child) {
                         return (
                             <CategoryTree
@@ -73,10 +65,8 @@ function CategoryTree(props) {
                             />
                         );
                     })}
-
                 </div>
             )}
-
         </div>
     );
 }
